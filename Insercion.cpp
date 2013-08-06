@@ -1,40 +1,44 @@
 #include <iostream>
-using namespace std;
 
-void insercion(int [],int);
-void mostrar(const int[],int);
-
-int main (int argc,char **argv)
+using std::cout;
+using std::endl;
+template <class T>
+void insercion(T arreglo[],const int tam)
 {
-	const int tam = 12;
-	int vector[]={0,7,1,10,3,0,0,7,1,10,3,0};
-	mostrar(vector,tam);
-	insercion(vector,tam);
-	mostrar(vector,tam);
-	return 0;
-}
-
-void insercion(int vec[],int tam)
-{
-	for(int i=1;i<tam;i++)
+	for (int i=1;i<tam;i++)
 	{
+		T aux = arreglo[i];
 		int indice = i;
-		int aux = vec[i];
-			while(indice>0 && aux<vec[indice-1])
-				{
-					vec[indice]=vec[indice-1];cout<<"while ";
-					mostrar(vec,tam); cout<<"indice->"<<indice<<", vec[indice]->"<<vec[indice]<<", aux->"<<aux<<endl;
-					indice--;
-				}
-			vec[indice]=aux;
-	}
-} 	
-
-void mostrar(const int vec[],int tam)
+		while(indice > 0 && aux<arreglo[indice-1])
+		{
+			arreglo[indice]=arreglo[indice-1];
+			indice--;
+		}
+		arreglo[indice]=aux;
+	} 
+}
+template <class T>
+void mostrar(T arreglo[],const int tam)
 {
-	for (int i =0;i<tam;i++)
+	for (int i=0;i<tam;i++)
 	{
-		cout<<vec[i]<<",";
+		cout<<arreglo[i]<<" ";
 	}
 	cout<<endl;
+}
+
+int main()
+{
+	const int tam = 10;
+	int v1[tam]={2,6,9,2,5,8,1,0,3,8};
+	float v2[tam]={1.5,34.7,3,7,8.1,9.7,2,5.2,7,8.4};
+
+	mostrar(v1,tam);
+	insercion(v1,tam);
+	mostrar(v1,tam);
+	mostrar(v2,tam);
+	insercion(v2,tam);
+	mostrar(v2,tam);
+
+	return 0;
 }
